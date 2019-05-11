@@ -1,0 +1,7 @@
+---
+
+- name: Config Prom
+  hosts: all
+  become: yes
+  roles: 
+    - prometheus

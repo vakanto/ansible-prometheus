@@ -1,0 +1,16 @@
+global:
+  scrape_interval: {{ scrape_interval }}
+  external_labels:
+    monitor: '{{ monitoring_instance }}'
+
+scrape_configs:
+{% for job in jobs.values() %}
+  - job_name: {{ job.job_name }}
+    scrape_interval: {{ job.scrape_interval }}
+    static_configs: 
+      - targets:[
+        {% for target in job.targets.values() %}
+	'{{ target.ip }}'
+	{% endfor %}
+      ]
+{% endfor %}

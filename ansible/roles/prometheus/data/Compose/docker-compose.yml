@@ -1,0 +1,27 @@
+---
+version: '3'
+services:
+   prometheus:
+     image: prom/prometheus
+     ports: 
+       - "9090:9090"
+     networks:
+       - prom_net
+     volumes:
+       - "./config/:/etc/prometheus/"
+
+   cAdvisor:
+     image: google/cadvisor
+     ports: 
+       - 8080:9101
+     volumes:
+       - /:/rootfs:ro
+       - /var/run:/var/run:ro
+       - /sys:/sys:ro
+       - /var/lib/docker/:/var/lib/docker:ro
+       - /dev/disk/:/dev/disk:ro
+ 
+networks:
+  prom_net:
+    driver: bridge
+

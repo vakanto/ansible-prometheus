@@ -1,0 +1,9 @@
+---
+- debug:
+    var: jobs
+
+- name: Create config file
+  template:
+    src: "{{ role_path }}/data/config/prometheus.yml.j2"
+    dest: "{{ role_path }}/data/prometheus.yml"
+    owner: "{{ ansible_user }}"
