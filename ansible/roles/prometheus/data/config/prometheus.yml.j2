@@ -4,13 +4,29 @@ global:
     monitor: '{{ monitoring_instance }}'
 
 scrape_configs:
-{% for job in jobs.values() %}
-  - job_name: {{ job.job_name }}
-    scrape_interval: {{ job.scrape_interval }}
+{% for job in jobs %}
+{% for values in job.values() %}
+  - job_name: {{ values.job_name }}
+    scrape_interval: {{ values.scrape_interval }}
     static_configs: 
       - targets:[
-        {% for target in job.targets.values() %}
-	'{{ target.ip }}'
-	{% endfor %}
-      ]
+#
+{% for targets in values.targets %}
+{% if not loop.last %}
+##
+{% for targetValues in targets.values() %}
+	'{{ targetValues.ip }}',
+{% endfor %}
+##
+{% else %}
+##
+{% for targetValues in targets.values() %}
+	'{{ targetValues.ip }}'
+{% endfor %}
+##
+{% endif %}
+{% endfor %}
+#	]
+
+{% endfor %}
 {% endfor %}
