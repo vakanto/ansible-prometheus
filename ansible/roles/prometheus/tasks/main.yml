@@ -7,3 +7,10 @@
     src: "{{ role_path }}/data/config/prometheus.yml.j2"
     dest: "{{ role_path }}/data/prometheus.yml"
     owner: "{{ ansible_user }}"
+
+
+- name: Create templates
+  include: create_template.yml values="{{ item.values() }}" attributes={{ values[0] }} name={{ attributes.name }} labels={{ attributes.labels }}
+  with_list: "{{ node_groups }}"
+
+

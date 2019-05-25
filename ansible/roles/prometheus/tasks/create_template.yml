@@ -1,0 +1,22 @@
+---
+
+- name: Templates | Create target templates
+  copy: 
+    src: "{{ role_path }}/data/config/targets.j2"
+    dest: "{{ role_path }}/data/config/tmp_plates/{{ name }}.j2"
+
+- name: Templates | Inject names into target templates
+  replace:
+    path: "{{ role_path }}/data/config/tmp_plates/{{ name }}.j2"
+    regexp: "node_group"
+    replace: "{{ name }}"
+
+- name: Templates | Create config files from template
+  template:
+    src: "{{ role_path }}/data/config/tmp_plates/{{ name }}.j2"
+    dest: "{{ role_path }}/data/config/{{ name }}.yml"
+  
+- name: Templates | Delete tmp_plates
+  file:
+    path: "{{ role_path }}/data/config/tmp_plates/{{ name }}.j2"
+    state: absent
