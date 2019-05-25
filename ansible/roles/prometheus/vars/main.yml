@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 
 scrape_interval: 30s
 monitoring_instance: MeinPrometheus
@@ -22,6 +23,3 @@ node_groups:
       name: "manager_nodes"
       labels:
         - "test2"
-
-
-
