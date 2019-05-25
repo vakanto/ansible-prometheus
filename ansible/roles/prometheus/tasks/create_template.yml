@@ -14,7 +14,7 @@
 - name: Templates | Create config files from template
   template:
     src: "{{ role_path }}/data/config/tmp_plates/{{ name }}.j2"
-    dest: "{{ role_path }}/data/config/{{ name }}.yml"
+    dest: "{{ role_path }}/data/config/config_files/{{ name }}.yml"
   
 - name: Templates | Delete tmp_plates
   file:

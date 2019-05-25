@@ -1,18 +1,17 @@
 ---
-<<<<<<< HEAD
 
 scrape_interval: 30s
 monitoring_instance: MeinPrometheus
 
 jobs:
-  meinJob:
-    job_name: meinJob
-    scrape_interval: 30s
-    targets:
-      target1:
-        ip: 192.168.178.2
-      target2:
-        ip: 10.10.20.85
+  - meinJob:
+      job_name: meinJob
+      scrape_interval: 30s
+      targets:
+        - target1:
+            ip: 192.168.178.2
+        - target2:
+            ip: 10.10.20.85
 
 node_groups:
   - swarm_nodes:
